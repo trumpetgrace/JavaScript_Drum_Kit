@@ -1,0 +1,88 @@
+<html>
+
+<head>
+<title>JS Drum Kit</title>
+<link rel="stylesheet" href="style.css"
+</head>
+
+<body>
+  <main class="keys">
+    <ul>
+      <li class="a65">
+        <kbd>A</kbd>
+        <span class="sound">clap</span>
+      </li>
+      <li class="a83">
+        <kbd>S</kbd>
+        <span class="sound">hihat</span>
+      </li>
+      <li class="a68">
+        <kbd>D</kbd>
+        <span class="sound">kick</span>
+      </li>
+      <li class="a70">
+        <kbd>F</kbd>
+        <span class="sound">openhat</span>
+      </li>
+      <li class="a71">
+        <kbd>G</kbd>
+        <span class="sound">boom</span>
+      </li>
+      <li class="a72">
+        <kbd>H</kbd>
+        <span class="sound">ride</span>
+      </li>
+      <li class="a74">
+        <kbd>J</kbd>
+        <span class="sound">snare</span>
+      </li>
+      <li class="a75">
+        <kbd>K</kbd>
+        <span class="sound">tom</span>
+      </li>
+      <li class="a76">
+        <kbd>L</kbd>
+        <span class="sound">tink</span>
+      </li>
+    </ul>
+  </main>
+
+  <audio class="a65" src="clap.wav"></audio>
+  <audio class="a83" src="hihat.wav"></audio>
+  <audio class="a68" src="kick.wav"></audio>
+  <audio class="a70" src="openhat.wav"></audio>
+  <audio class="a71" src="boom.wav"></audio>
+  <audio class="a72" src="ride.wav"></audio>
+  <audio class="a74" src="snare.wav"></audio>
+  <audio class="a75" src="tom.wav"></audio>
+  <audio class="a76" src="tink.wav"></audio>
+
+</body>
+
+<script>
+
+window.addEventListener("keydown",
+function(e){
+  console.log(e);
+  var keyPressed = e.keyCode;
+  var audioToSelect = "audio.a" + keyPressed
+  var audioFile = document.querySelector(audioToSelect);
+  console.log(audioFile);
+  if (!audioFile) return; // Stops function for keys with no audio
+  var elementToSelect = "li.a" + keyPressed;
+  var li = document.querySelector(elementToSelect);
+  li.classList.add("playing");
+  audioFile.currentTime = 0; // Starts audio file over each time the key is pressed
+  audioFile.play();
+  removeTransition(li);
+});
+
+function removeTransition(li) {
+  setTimeout(function(){
+    li.classList.remove("playing");
+  }, 100);
+}
+
+
+</script>
+</html>
